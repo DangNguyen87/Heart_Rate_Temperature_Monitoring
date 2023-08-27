@@ -135,12 +135,7 @@ Item {
         HeartRateArea
         {
             width: parent.width
-            height: (parent.height - system_status_bar.height)/2
-        }
-        RespRateArea
-        {
-            width: parent.width
-            height: (parent.height - system_status_bar.height)/2
+            height: (parent.height - system_status_bar.height)/1
         }
     }
 }

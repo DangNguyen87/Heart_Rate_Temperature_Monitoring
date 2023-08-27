@@ -11,14 +11,12 @@ Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
             legend.visible: false
-            antialiasing: true
             plotArea: Qt.rect(0, 0, width, height)
+            plotAreaColor: "white"
+            antialiasing: true
             clip: true
-            focus: true
-            //dropShadowEnabled: true
-            //backgroundColor: "transparent"
-            //plotAreaColor: "transparent"
-            //Chart view property, data expose from model (max x, max y), color
+            //Todo: data expose from model (max x, max y), color, line style
+            //Number of chart gird line
 
             LineSeries {
                 id: heart_rate_seri
@@ -30,8 +28,6 @@ Item {
                     min: 0; max: 100; visible: true;
                     labelsVisible:false; gridVisible: true}
                 name: "Line"
-                //style: Qt.DotLine
-                //width: 4.0
             }
             //Query the data from cpp based on the position of column
             VXYModelMapper
@@ -51,7 +47,6 @@ Item {
             text: "Data"
             font.family: "Arial"
             font.pointSize: 12
-            //color: JsUtil.set_color(index)
         }
         Label
         {
@@ -61,7 +56,6 @@ Item {
             Layout.preferredWidth: 90
             text: "N/A"
             font.family: "Arial"
-            //color: JsUtil.set_color(index)
             font.pointSize: 30
             font.bold: true
             Layout.alignment: Qt.AlignHCenter
@@ -76,7 +70,6 @@ Item {
             text: "Unit"
             font.pointSize: 9
             Layout.alignment: Qt.AlignRight
-            //color: JsUtil.set_color(index)
         }
         Connections
         {
