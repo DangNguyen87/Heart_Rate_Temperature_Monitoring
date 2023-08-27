@@ -14,6 +14,8 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Quick Charts)
 
 set(PROJECT_SOURCES
         main.cpp
+        heartRateDataModel.cpp
+        heartRateDataModel.h
         qml.qrc
 )
 

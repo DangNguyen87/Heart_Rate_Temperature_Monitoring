@@ -1,6 +1,7 @@
 #include <QApplication>
+#include <QQmlContext>
 #include <QQmlApplicationEngine>
-
+#include "heartRateDataModel.h"
 
 int main(int argc, char *argv[])
 {
@@ -10,6 +11,10 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
+
+    HeartRateDataModel heartRateModel;
+    engine.rootContext()->setContextProperty("heartRateModel", &heartRateModel);
+
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
