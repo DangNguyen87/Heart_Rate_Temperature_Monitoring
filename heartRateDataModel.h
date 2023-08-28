@@ -20,7 +20,7 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
 signals:
-    void addNewDataChanged(int iTimeSec);
+    void addNewDataChanged(float xValue, float yValue);
 
 private:
     QList<QList<qreal> *> m_data;

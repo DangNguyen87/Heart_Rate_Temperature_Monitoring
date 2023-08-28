@@ -38,7 +38,7 @@ void HeartRateDataModel::dataUpdate()
     beginInsertRows(QModelIndex(), m_data.count(), m_data.count());
     m_data.append(dataList);
     endInsertRows();
-    emit addNewDataChanged(m_timeCount);
+    emit addNewDataChanged(m_timeCount, dataList->takeAt(1));
 }
 
 int HeartRateDataModel::rowCount(const QModelIndex &parent) const

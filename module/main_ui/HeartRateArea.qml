@@ -17,7 +17,11 @@ Item {
             dropShadowEnabled: true
             antialiasing: true
             clip: true
-            //Todo: data expose from model (max x, max y), notify data (x,y) and update data lable
+            //Todo:
+            //    data expose from model (max x, max y)
+            //    implement table header
+            //    add temperature UI
+            //    Implement queue and sensor thread
 
             LineSeries {
                 id: heart_rate_seri
@@ -38,7 +42,7 @@ Item {
                             lineVisible:false;
                             labelsVisible:false;
                             gridVisible: true;
-                            tickCount: 10}
+                            tickCount: 11}
             }
             //Query the data from cpp based on the position of column
             VXYModelMapper
@@ -61,6 +65,7 @@ Item {
         }
         Label
         {
+            id: heart_rate_value
             Layout.fillHeight: true
             Layout.minimumWidth: 60
             Layout.preferredWidth: 90
@@ -70,7 +75,7 @@ Item {
             font.pointSize: 30
             font.bold: true
             color: hrUiColor
-            text: "N/A"
+            text: "0"
         }
         Label
         {
@@ -88,14 +93,15 @@ Item {
         {
             /* Scroll graph when has new value outside the frame of the graph */
             target: heartRateModel
-            function onAddNewDataChanged(timeValue)
+            function onAddNewDataChanged(xValue, yValue)
             {
-                if(timeValue >= axis_x_heart_rate.max)
+                if(xValue >= axis_x_heart_rate.max)
                 {
                     var axisLen = axis_x_heart_rate.max - axis_x_heart_rate.min
-                    axis_x_heart_rate.max = timeValue + 1
+                    axis_x_heart_rate.max = xValue + 1
                     axis_x_heart_rate.min = axis_x_heart_rate.max - axisLen
                 }
+                heart_rate_value.text = yValue
             }
         }
     }
