@@ -4,6 +4,7 @@ import QtQuick.Controls 2.15
 import QtCharts
 
 Item {
+    property color hrUiColor;
     RowLayout {
         anchors.fill: parent
         spacing: 5
@@ -11,23 +12,31 @@ Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
             legend.visible: false
-            plotArea: Qt.rect(0, 0, width, height)
+            plotArea: Qt.rect(0, 0, width, height - 1)
             plotAreaColor: "white"
             antialiasing: true
             clip: true
-            //Todo: data expose from model (max x, max y), color, line style
-            //Number of chart gird line
+            //Todo: data expose from model (max x, max y), notify data (x,y) and update data lable
 
             LineSeries {
                 id: heart_rate_seri
+                color: hrUiColor
                 axisX: ValueAxis {
-                    id: axis_x_heart_rate
-                    min: 0; max: 100; visible: true ;
-                    labelsVisible: false; gridVisible: false}
+                            id: axis_x_heart_rate
+                            min: 0;
+                            max: 100;
+                            visible: true ;
+                            labelsVisible: false;
+                            gridVisible: false}
                 axisY: ValueAxis {
-                    min: 0; max: 100; visible: true;
-                    labelsVisible:false; gridVisible: true}
-                name: "Line"
+                            id: axis_y_heart_rate
+                            min: 0;
+                            max: 100;
+                            visible: true;
+                            lineVisible:false;
+                            labelsVisible:false;
+                            gridVisible: true;
+                            tickCount: 10}
             }
             //Query the data from cpp based on the position of column
             VXYModelMapper
@@ -40,36 +49,38 @@ Item {
         }
         Label
         {
-            id: _title_MF
             Layout.fillHeight: true
             Layout.minimumWidth: 60
             Layout.preferredWidth: 90
-            text: "Data"
             font.family: "Arial"
             font.pointSize: 12
+            color: hrUiColor
+            text: "HR"
         }
         Label
         {
-            id: _value_MF
             Layout.fillHeight: true
             Layout.minimumWidth: 60
             Layout.preferredWidth: 90
-            text: "N/A"
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
             font.family: "Arial"
             font.pointSize: 30
             font.bold: true
-            Layout.alignment: Qt.AlignHCenter
+            color: hrUiColor
+            text: "N/A"
         }
         Label
         {
-            id: _unit_MF
             Layout.fillHeight: true
             Layout.minimumWidth: 60
             Layout.preferredWidth: 90
+            horizontalAlignment: Text.AlignLeft
+            verticalAlignment: Text.AlignBottom
             font.family: "Arial"
-            text: "Unit"
             font.pointSize: 9
-            Layout.alignment: Qt.AlignRight
+            color: hrUiColor
+            text: "Cycle/Min"
         }
         Connections
         {
@@ -79,9 +90,9 @@ Item {
             {
                 if(timeValue >= axis_x_heart_rate.max)
                 {
-                    var axisXLen = axis_x_heart_rate.max - axis_x_heart_rate.min
+                    var axisLen = axis_x_heart_rate.max - axis_x_heart_rate.min
                     axis_x_heart_rate.max = timeValue + 1
-                    axis_x_heart_rate.min = axis_x_heart_rate.max - axisXLen
+                    axis_x_heart_rate.min = axis_x_heart_rate.max - axisLen
                 }
             }
         }
