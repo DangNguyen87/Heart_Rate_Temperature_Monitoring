@@ -14,12 +14,14 @@ Item {
             legend.visible: false
             plotArea: Qt.rect(0, 0, width, height - 1)
             plotAreaColor: "white"
+            dropShadowEnabled: true
             antialiasing: true
             clip: true
             //Todo: data expose from model (max x, max y), notify data (x,y) and update data lable
 
             LineSeries {
                 id: heart_rate_seri
+                width: 2
                 color: hrUiColor
                 axisX: ValueAxis {
                             id: axis_x_heart_rate
