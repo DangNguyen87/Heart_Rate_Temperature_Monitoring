@@ -18,8 +18,6 @@ Item {
             antialiasing: true
             clip: true
             //Todo:
-            //    data expose from model (max x, max y)
-            //    implement table header
             //    add temperature UI
             //    Implement queue and sensor thread
 
@@ -30,14 +28,14 @@ Item {
                 axisX: ValueAxis {
                             id: axis_x_heart_rate
                             min: 0;
-                            max: 100;
+                            max: heartRateModel.HR_ROW_COUNT;
                             visible: true ;
                             labelsVisible: false;
                             gridVisible: false}
                 axisY: ValueAxis {
                             id: axis_y_heart_rate
                             min: 0;
-                            max: 100;
+                            max: heartRateModel.HR_MAX_VALUE;
                             visible: true;
                             lineVisible:false;
                             labelsVisible:false;

@@ -5,29 +5,40 @@
 #include <QObject>
 #include <QTimer>
 
+#define HR_SHARED_CONSTANT(type, name, value) \
+                static inline const type name = value; \
+                Q_PROPERTY(type name MEMBER name CONSTANT)
+
 class HeartRateDataModel : public QAbstractTableModel
 {
     Q_OBJECT
 
-public slots:
-    void dataUpdate();
-
 public:
+    HR_SHARED_CONSTANT(int, HR_ROW_COUNT, 100);
+    HR_SHARED_CONSTANT(int, HR_COLUMN_COUNT, 2);
+    HR_SHARED_CONSTANT(float, HR_MAX_VALUE, 100.0);
+
+    enum HR_COLUMN
+    {
+        COLUMN_TIME_STAMP = 0,
+        COLUMN_HEART_RATE
+    };
     explicit HeartRateDataModel(QObject *parent = nullptr);
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
-//    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+
+public slots:
+    void dataUpdate();
 
 signals:
     void addNewDataChanged(float xValue, float yValue);
 
 private:
     QList<QList<qreal> *> m_data;
-    int m_columnCount;
-    int m_rowCount;
-    int m_timeCount;
     QTimer* m_timer;
+    int m_timeCount;
 };
 
 #endif // HEARTRATEDATAMODEL_H

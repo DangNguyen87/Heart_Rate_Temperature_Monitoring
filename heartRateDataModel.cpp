@@ -1,17 +1,14 @@
 #include "heartRateDataModel.h"
 #include <QtCore/QRandomGenerator>
 
-
 HeartRateDataModel::HeartRateDataModel(QObject *parent)
     : QAbstractTableModel{parent}
 {
-    m_columnCount = 2;
-    m_rowCount = 100;
     m_timeCount = 0;
 
-    // create a timer
+    // Create a timer
     m_timer = new QTimer(this);
-    // setup signal and slot
+    // Setup signal and slot
     connect(m_timer, SIGNAL(timeout()),
           this, SLOT(dataUpdate()));
     m_timer->start(1000);
@@ -20,14 +17,14 @@ HeartRateDataModel::HeartRateDataModel(QObject *parent)
 void HeartRateDataModel::dataUpdate()
 {
     m_timeCount++;
-    /* Limit size of the list data */
-    if (m_data.size() >= m_rowCount)
+    /* Limit size of the list data,remove the first item in the list */
+    if (m_data.size() >= HeartRateDataModel::HR_ROW_COUNT)
     {
         beginRemoveRows(QModelIndex(), 0, 0);
         m_data.pop_front();
         endRemoveRows();
     }
-    QList<qreal> *dataList = new QList<qreal>(m_columnCount);
+    QList<qreal> *dataList = new QList<qreal>(HeartRateDataModel::HR_COLUMN_COUNT);
     for (int k = 0; k < dataList->size(); k++) {
         if (k % 2 == 0)
             dataList->replace(k, m_timeCount);
@@ -44,19 +41,30 @@ void HeartRateDataModel::dataUpdate()
 int HeartRateDataModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return m_data.count();
+    return m_data.size();
 }
 
 int HeartRateDataModel::columnCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return m_columnCount;
+    return HeartRateDataModel::HR_COLUMN_COUNT;
 }
 
-//QVariant HeartRateDataModel::headerData(int section, Qt::Orientation orientation, int role) const
-//{
-
-//}
+QVariant HeartRateDataModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    if (role == Qt::DisplayRole && orientation == Qt::Horizontal)
+    {
+        if (section == HeartRateDataModel::COLUMN_TIME_STAMP)
+        {
+            return QString("Time");
+        }
+        else if (section == HeartRateDataModel::COLUMN_HEART_RATE)
+        {
+            return QString("Heart Rate");
+        }
+    }
+    return QVariant();
+}
 
 QVariant HeartRateDataModel::data(const QModelIndex &index, int role) const
 {
