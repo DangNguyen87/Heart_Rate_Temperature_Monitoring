@@ -3,7 +3,7 @@ import QtCharts
 
 Window {
     id: root
-    minimumWidth: 780
+    minimumWidth: 960
     minimumHeight: 480
     visible: true
     title: qsTr("Continuous Patient Monitoring")

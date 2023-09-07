@@ -8,5 +8,6 @@
         <file>images/WiFi_Connected.png</file>
         <file>images/WiFi_Disconnected.png</file>
         <file>module/main_ui/HeartRateArea.qml</file>
+        <file>module/main_ui/TemperatureArea.qml</file>
     </qresource>
 </RCC>

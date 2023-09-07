@@ -9,8 +9,7 @@ Item {
         spacing: 1
 
         //System status bar
-        Rectangle
-        {
+        Rectangle {
             id: system_status_bar
             width: parent.width
             height: 60
@@ -24,13 +23,11 @@ Item {
                                               + Qt.formatDateTime(new Date(), "dd/MM/yyyy")
             }
 
-            RowLayout
-            {
+            RowLayout {
                 anchors.fill: parent
                 spacing: 10
                 //Setting
-                Button
-                {
+                Button {
                     id: setting_menu_btn
                     Layout.fillHeight: true
                     Layout.minimumWidth: 60
@@ -39,14 +36,12 @@ Item {
                     font.pointSize: 14
                     text: "Setting"
 
-                    onClicked:
-                    {
+                    onClicked: {
                         console.log("Display setting menu")
                     }
                 }
                 //Info
-                Label
-                {
+                Label {
                     id: patient_info
                     Layout.fillWidth: true
                     Layout.fillHeight: true
@@ -60,8 +55,7 @@ Item {
 
                 }
                 //Network
-                Image
-                {
+                Image {
                     id: nw_status
                     sourceSize.width: 30
                     state: "Disconnected"
@@ -80,8 +74,7 @@ Item {
                         }]
                 }
                 //Speaker
-                Image
-                {
+                Image {
                     id: sound_status
                     sourceSize.width: 30
                     state: "Mute"
@@ -100,13 +93,11 @@ Item {
                         }]
                 }
                 //Battery
-                Image
-                {
+                Image  {
                     id: battery_status
                     sourceSize.width: 45
                     source: "qrc:/images/Bat_Shape.png"
-                    Text
-                    {
+                    Text {
                         id: battery_percentage
                         anchors.centerIn: parent
                         font.family: "Arial"
@@ -116,8 +107,7 @@ Item {
                     }
                 }
                 //Datetime
-                Label
-                {
+                Label {
                     id: datetime
                     Layout.fillHeight: true
                     Layout.minimumWidth: 90
@@ -132,11 +122,10 @@ Item {
                 }
             }
         }
-        HeartRateArea
-        {
+        HeartRateArea {
             width: parent.width
             height: (parent.height - system_status_bar.height)/1
-            hrUiColor: "mediumseagreen"
+            hrUiTextColor: "mediumseagreen"
         }
     }
 }
