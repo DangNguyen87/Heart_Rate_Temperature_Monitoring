@@ -4,13 +4,17 @@ import QtQuick.Controls 2.15
 import QtCharts
 
 Item {
+    id: hr_ui_root
     required property color hrUiTextColor;
+
     RowLayout {
         anchors.fill: parent
         spacing: 5
+
         ChartView {
             Layout.fillWidth: true
             Layout.fillHeight: true
+            Layout.preferredWidth: 750
             legend.visible: false
             plotArea: Qt.rect(0, 0, width, height - 1)
             plotAreaColor: "white"
@@ -21,7 +25,7 @@ Item {
             LineSeries {
                 id: heart_rate_seri
                 width: 2
-                color: hrUiTextColor
+                color: hr_ui_root.hrUiTextColor
                 axisX: ValueAxis {
                             id: axis_x_heart_rate
                             min: 0;
@@ -46,64 +50,80 @@ Item {
                 xColumn: 0
                 yColumn: 1
             }
-        }
-        Column {
-            Layout.fillHeight: true
-            Layout.minimumWidth: 200
-            Layout.preferredWidth: 250
-            spacing: 10
-
-            Row {
-                height: parent.height / 4
-                width: parent.width
-
-                Label {
-                    height: parent.height
-                    width: 50
-                    font.family: "Arial"
-                    color: hrUiTextColor
-                    textFormat: Text.RichText
-                    text: "<div style='font-size: 14pt;'>HR</div>
-                           <div style='font-size: 10pt;'>bmp</div>"
-                }
-                Label {
-                    height: parent.height
-                    width: 50
-                    horizontalAlignment: Text.AlignLeft
-                    verticalAlignment: Text.AlignBottom
-                    font.family: "Arial"
-                    font.pointSize: 12
-                    color: hrUiTextColor
-                    text: "120\n60"
-                }
-                Label {
-                    id: heart_rate_value
-                    height: parent.height
-                    width: 100
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                    font.family: "Arial"
-                    font.pointSize: 60
-                    font.bold: true
-                    color: hrUiTextColor
-                    text: "0"
-                }
-                Label {
-                    height: parent.height
-                    horizontalAlignment: Text.AlignLeft
-                    verticalAlignment: Text.AlignBottom
-                    font.family: "Arial"
-                    font.pointSize: 9
-                    color: hrUiTextColor
-                    text: ""
-                }
-            }
+            // Right border
             Rectangle {
-                height: parent.height * 1 / 4
-                width: parent.width
+                height: parent.height
+                width: 1
+                anchors.right: parent.right
+                opacity: 0.5
+                color: "lightgray"
+            }
+        }
+        Item {
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.preferredWidth: 250
+            Layout.maximumWidth: 300
+
+            ColumnLayout {
+                anchors.fill: parent
+                spacing: 10
+
+                Item {
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    Row {
+                        anchors.fill: parent
+                        Label {
+                            height: parent.height
+                            width: 50
+                            font.family: "Arial"
+                            color: hr_ui_root.hrUiTextColor
+                            textFormat: Text.RichText
+                            text: "<div style='font-size: 14pt;'>HR</div>
+                                   <div style='font-size: 10pt;'>bmp</div>"
+                        }
+                        Label {
+                            height: parent.height
+                            width: 50
+                            horizontalAlignment: Text.AlignLeft
+                            verticalAlignment: Text.AlignBottom
+                            font.family: "Arial"
+                            font.pointSize: 12
+                            color: hr_ui_root.hrUiTextColor
+                            text: "120\n60"
+                        }
+                        Label {
+                            id: heart_rate_value
+                            height: parent.height
+                            width: 100
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                            font.family: "Arial"
+                            font.pointSize: 60
+                            font.bold: true
+                            color: hr_ui_root.hrUiTextColor
+                            text: "0"
+                        }
+                    }
+                    // Bottom border
+                    Rectangle {
+                        height: 1
+                        width: parent.width
+                        anchors.bottom: parent.bottom
+                        opacity: 0.5
+                        color: hr_ui_root.hrUiTextColor
+                    }
+                }
                 TemperatureArea {
-                    anchors.fill: parent
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
                     tempUiTextColor: "orange"
+                }
+                // Dummy item to fill empty space
+                Item {
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
                 }
             }
         }

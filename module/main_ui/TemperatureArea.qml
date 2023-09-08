@@ -110,6 +110,7 @@ Item {
         height: 1
         width: parent.width
         anchors.bottom: parent.bottom
+        opacity: 0.5
         color: temp_ui_root.tempUiTextColor
     }
 }

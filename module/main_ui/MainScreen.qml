@@ -3,7 +3,6 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
 Item {
-
     Column {
         anchors.fill: parent
         spacing: 1
@@ -26,6 +25,7 @@ Item {
             RowLayout {
                 anchors.fill: parent
                 spacing: 10
+
                 //Setting
                 Button {
                     id: setting_menu_btn
@@ -92,20 +92,6 @@ Item {
                                 source: "qrc:/images/Mute_Sound.png" }
                         }]
                 }
-                //Battery
-                Image  {
-                    id: battery_status
-                    sourceSize.width: 45
-                    source: "qrc:/images/Bat_Shape.png"
-                    Text {
-                        id: battery_percentage
-                        anchors.centerIn: parent
-                        font.family: "Arial"
-                        font.pointSize: 10
-                        color: "#F7FFE5"
-                        text: "--/--"
-                    }
-                }
                 //Datetime
                 Label {
                     id: datetime
@@ -124,7 +110,7 @@ Item {
         }
         HeartRateArea {
             width: parent.width
-            height: (parent.height - system_status_bar.height)/1
+            height: parent.height - system_status_bar.height
             hrUiTextColor: "mediumseagreen"
         }
     }
