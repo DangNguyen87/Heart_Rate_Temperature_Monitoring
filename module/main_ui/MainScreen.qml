@@ -73,25 +73,6 @@ Item {
                                 source: "qrc:/images/WiFi_Disconnected.png" }
                         }]
                 }
-                //Speaker
-                Image {
-                    id: sound_status
-                    sourceSize.width: 30
-                    state: "Mute"
-
-                    states: [
-                        State{
-                            name: "Unmute"
-                            PropertyChanges {
-                                target: sound_status;
-                                source: "qrc:/images/Mute_Sound.png" }},
-                        State{
-                            name: "Mute"
-                            PropertyChanges {
-                                target: sound_status;
-                                source: "qrc:/images/Mute_Sound.png" }
-                        }]
-                }
                 //Datetime
                 Label {
                     id: datetime
