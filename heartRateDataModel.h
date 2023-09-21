@@ -4,6 +4,9 @@
 #include <QAbstractTableModel>
 #include <QObject>
 #include <QTimer>
+#include <QMutex>
+#include <QQueue>
+#include "ecgData.h"
 
 #define HR_SHARED_CONSTANT(type, name, value) \
                 static inline const type name = value; \
@@ -29,6 +32,7 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
+    void addEcgData(EcgData *ecg);
 public slots:
     void dataUpdate();
 
@@ -37,8 +41,11 @@ signals:
 
 private:
     QList<QList<qreal> *> m_data;
+    QQueue<EcgData*> m_ecgData;
+    QMutex m_ecgDataMutex;
     QTimer* m_timer;
     int m_timeCount;
+    qint64 m_preTimeStamp;
 };
 
 #endif // HEARTRATEDATAMODEL_H

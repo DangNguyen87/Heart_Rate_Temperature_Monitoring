@@ -16,6 +16,10 @@ set(PROJECT_SOURCES
         main.cpp
         heartRateDataModel.cpp
         heartRateDataModel.h
+        sensorDataThread.cpp
+        sensorDataThread.h
+        ecgData.cpp
+        ecgData.h
         qml.qrc
 )
 

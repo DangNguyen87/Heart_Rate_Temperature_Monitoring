@@ -12,30 +12,59 @@ HeartRateDataModel::HeartRateDataModel(QObject *parent)
     connect(m_timer, SIGNAL(timeout()),
           this, SLOT(dataUpdate()));
     m_timer->start(1000);
+    m_preTimeStamp = 0;
 }
 
 void HeartRateDataModel::dataUpdate()
 {
-    m_timeCount++;
-    /* Limit size of the list data,remove the first item in the list */
-    if (m_data.size() >= HeartRateDataModel::HR_ROW_COUNT)
+    EcgData *ecg;
+    QMutexLocker locker(&m_ecgDataMutex);
+
+    // No data in queue, return
+    if (m_ecgData.isEmpty())
     {
-        beginRemoveRows(QModelIndex(), 0, 0);
-        m_data.pop_front();
-        endRemoveRows();
+        return;
     }
-    QList<qreal> *dataList = new QList<qreal>(HeartRateDataModel::HR_COLUMN_COUNT);
-    for (int k = 0; k < dataList->size(); k++) {
-        if (k % 2 == 0)
-            dataList->replace(k, m_timeCount);
+
+    while (!m_ecgData.isEmpty())
+    {
+        /* Limit size of the list data,remove the first item in the list */
+        if (m_data.size() >= HeartRateDataModel::HR_ROW_COUNT)
+        {
+            beginRemoveRows(QModelIndex(), 0, 0);
+            m_data.pop_front();
+            endRemoveRows();
+        }
+        /* Get data from queue and put into model data */
+        ecg = m_ecgData.dequeue();
+        /* Todo: */
+        /* Review sync mechanism between threads */
+
+        if ((ecg->m_timeStamp == m_preTimeStamp) && (m_preTimeStamp != 0))
+        {
+            /* Sensor data thread read data too fast drop later data with the same time stamp */
+            qDebug("Dupplicated time stamp %lld, drop data\n", ecg->m_timeStamp);
+        }
         else
-            dataList->replace(k, QRandomGenerator::global()->bounded(100));
+        {
+            if (ecg->m_timeStamp - m_preTimeStamp > 3)
+            {
+                /* Sensor data thread delay to read data every 1 second */
+                qDebug("Delay to read data %lld\n", ecg->m_timeStamp);
+            }
+
+            QList<qreal> *dataList = new QList<qreal>(HeartRateDataModel::HR_COLUMN_COUNT);
+            dataList->replace(0, ecg->m_timeStamp);
+            dataList->replace(1, ecg->m_ecgValue);
+
+            /* Add new data to the list */
+            beginInsertRows(QModelIndex(), m_data.count(), m_data.count());
+            m_data.append(dataList);
+            endInsertRows();
+            emit addNewDataChanged(ecg->m_timeStamp, ecg->m_ecgValue);
+        }
+        m_preTimeStamp = ecg->m_timeStamp;
     }
-    /* Add new data to the list */
-    beginInsertRows(QModelIndex(), m_data.count(), m_data.count());
-    m_data.append(dataList);
-    endInsertRows();
-    emit addNewDataChanged(m_timeCount, dataList->takeAt(1));
 }
 
 int HeartRateDataModel::rowCount(const QModelIndex &parent) const
@@ -72,4 +101,10 @@ QVariant HeartRateDataModel::data(const QModelIndex &index, int role) const
         return m_data[index.row()]->at(index.column());
     }
     return QVariant();
+}
+
+void HeartRateDataModel::addEcgData(EcgData *ecg)
+{
+    QMutexLocker locker(&m_ecgDataMutex);
+    m_ecgData.enqueue(ecg);
 }
