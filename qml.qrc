@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>module/setting_ui/setting_menu.qml</file>
+        <file>images/Bat_Shape.png</file>
+        <file>images/Mute_Sound.png</file>
+        <file>module/main_ui/MainScreen.qml</file>
+        <file>images/WiFi_Connected.png</file>
+        <file>images/WiFi_Disconnected.png</file>
+        <file>module/main_ui/HeartRateArea.qml</file>
+        <file>module/main_ui/TemperatureArea.qml</file>
+    </qresource>
+</RCC>
