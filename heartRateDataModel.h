@@ -20,6 +20,8 @@ public:
     HR_SHARED_CONSTANT(int, HR_ROW_COUNT, 100);
     HR_SHARED_CONSTANT(int, HR_COLUMN_COUNT, 2);
     HR_SHARED_CONSTANT(float, HR_MAX_VALUE, 100.0);
+    HR_SHARED_CONSTANT(float, HR_MIN_RANGE, 65.0);
+    HR_SHARED_CONSTANT(float, HR_MAX_RANGE, 110.0);
 
     enum HR_COLUMN
     {
@@ -44,7 +46,6 @@ private:
     QQueue<EcgData*> m_ecgData;
     QMutex m_ecgDataMutex;
     QTimer* m_timer;
-    int m_timeCount;
     qint64 m_preTimeStamp;
 };
 

@@ -32,9 +32,10 @@ Item {
             font.family: "Arial"
             font.pointSize: 10
             color: temp_ui_root.tempUiTextColor
-            text: "38.5\n36.0"
+            text: temperatureModel.TSKIN_MAX_RANGE + "\n" + temperatureModel.TSKIN_MIN_RANGE
         }
         Label {
+            id: tskin_value
             Layout.fillHeight: true
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
@@ -42,7 +43,7 @@ Item {
             font.family: "Arial"
             font.pointSize: 30
             color: temp_ui_root.tempUiTextColor
-            text: "36.0"
+            text: ""
         }
         Label {
             Layout.fillHeight: true
@@ -62,9 +63,10 @@ Item {
             font.family: "Arial"
             font.pointSize: 10
             color: temp_ui_root.tempUiTextColor
-            text: "39.0\n36.0"
+            text: temperatureModel.TRECT_MAX_RANGE + "\n" + temperatureModel.TRECT_MIN_RANGE
         }
         Label {
+            id: trect_value
             Layout.fillHeight: true
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
@@ -72,7 +74,7 @@ Item {
             font.family: "Arial"
             font.pointSize: 30
             color: temp_ui_root.tempUiTextColor
-            text: "37.0"
+            text: ""
         }
         Label {
             Layout.fillHeight: true
@@ -95,14 +97,15 @@ Item {
             text: "TD"
         }
         Label {
+            id: temp_diff
             Layout.fillHeight: true
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             font.family: "Arial"
-            font.pointSize: 30
+            font.pointSize: 25
             color: temp_ui_root.tempUiTextColor
-            text: "(2.0)"
+            text: ""
         }
     }
     // Bottom border
@@ -112,5 +115,15 @@ Item {
         anchors.bottom: parent.bottom
         opacity: 0.5
         color: temp_ui_root.tempUiTextColor
+    }
+    Connections {
+        /* Scroll graph when has new value outside the frame of the graph */
+        target: temperatureModel
+        function onTemperatureDataChanged(tSkin, tRect)
+        {
+            tskin_value.text = tSkin.toFixed(1)
+            trect_value.text = tRect.toFixed(1)
+            temp_diff.text = "(" + (tRect - tSkin).toFixed(1) + ")"
+        }
     }
 }

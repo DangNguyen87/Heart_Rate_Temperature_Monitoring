@@ -20,6 +20,10 @@ set(PROJECT_SOURCES
         sensorDataThread.h
         ecgData.cpp
         ecgData.h
+        temperatureData.cpp
+        temperatureData.h
+        temperatureDataModel.cpp
+        temperatureDataModel.h
         qml.qrc
 )
 

@@ -91,7 +91,7 @@ Item {
                             font.family: "Arial"
                             font.pointSize: 12
                             color: hr_ui_root.hrUiTextColor
-                            text: "120\n60"
+                            text: heartRateModel.HR_MAX_RANGE + "\n" + heartRateModel.HR_MIN_RANGE
                         }
                         Label {
                             id: heart_rate_value

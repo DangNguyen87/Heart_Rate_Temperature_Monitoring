@@ -4,8 +4,6 @@
 HeartRateDataModel::HeartRateDataModel(QObject *parent)
     : QAbstractTableModel{parent}
 {
-    m_timeCount = 0;
-
     // Create a timer
     m_timer = new QTimer(this);
     // Setup signal and slot
@@ -37,8 +35,6 @@ void HeartRateDataModel::dataUpdate()
         }
         /* Get data from queue and put into model data */
         ecg = m_ecgData.dequeue();
-        /* Todo: */
-        /* Review sync mechanism between threads */
 
         if ((ecg->m_timeStamp == m_preTimeStamp) && (m_preTimeStamp != 0))
         {
@@ -97,7 +93,8 @@ QVariant HeartRateDataModel::headerData(int section, Qt::Orientation orientation
 
 QVariant HeartRateDataModel::data(const QModelIndex &index, int role) const
 {
-    if (role == Qt::DisplayRole) {
+    if (role == Qt::DisplayRole)
+    {
         return m_data[index.row()]->at(index.column());
     }
     return QVariant();

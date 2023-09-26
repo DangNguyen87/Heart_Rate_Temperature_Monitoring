@@ -13,10 +13,12 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     HeartRateDataModel heartRateModel;
-    SensorDataThread sensorThread(&heartRateModel);
+    TemperatureDataModel tempModel;
+    SensorDataThread sensorThread(&heartRateModel, &tempModel);
 
     sensorThread.start();
     engine.rootContext()->setContextProperty("heartRateModel", &heartRateModel);
+    engine.rootContext()->setContextProperty("temperatureModel", &tempModel);
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
