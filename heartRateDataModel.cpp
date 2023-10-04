@@ -49,9 +49,12 @@ void HeartRateDataModel::dataUpdate()
                 qDebug("Delay to read data %lld\n", ecg->m_timeStamp);
             }
 
-            QList<qreal> *dataList = new QList<qreal>(HeartRateDataModel::HR_COLUMN_COUNT);
-            dataList->replace(0, ecg->m_timeStamp);
-            dataList->replace(1, ecg->m_ecgValue);
+            //QList<qreal> *dataList = new QList<qreal>(HeartRateDataModel::HR_COLUMN_COUNT);
+            //dataList->replace(0, ecg->m_timeStamp);
+            //dataList->replace(1, ecg->m_ecgValue);
+            QList<qreal> *dataList = new QList<qreal>();
+            dataList->append(ecg->m_timeStamp);
+            dataList->append(ecg->m_ecgValue);
 
             /* Add new data to the list */
             beginInsertRows(QModelIndex(), m_data.count(), m_data.count());
