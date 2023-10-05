@@ -6,12 +6,9 @@
 
 int main(int argc, char *argv[])
 {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-#endif
     QApplication app(argc, argv);
-
     QQmlApplicationEngine engine;
+
     HeartRateDataModel heartRateModel;
     TemperatureDataModel tempModel;
     SensorDataThread sensorThread(&heartRateModel, &tempModel);
@@ -20,12 +17,10 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("heartRateModel", &heartRateModel);
     engine.rootContext()->setContextProperty("temperatureModel", &tempModel);
 
-    const QUrl url(QStringLiteral("qrc:/main.qml"));
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
-                     &app, [url](QObject *obj, const QUrl &objUrl) {
-        if (!obj && url == objUrl)
-            QCoreApplication::exit(-1);
-    }, Qt::QueuedConnection);
+    const QUrl url(u"qrc:/Continuous_Patient_Monitoring/Main.qml"_qs);
+    QObject::connect(&engine, &QQmlApplicationEngine::objectCreationFailed,
+        &app, []() { QCoreApplication::exit(-1); },
+        Qt::QueuedConnection);
     engine.load(url);
 
     return app.exec();

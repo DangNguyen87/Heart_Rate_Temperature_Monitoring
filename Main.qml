@@ -1,4 +1,5 @@
-import QtQuick 2.15
+import QtQuick
+import QtQuick.Window
 import QtCharts
 
 Window {
@@ -17,6 +18,6 @@ Window {
 
     Component.onCompleted:
     {
-        main_screen_loader.source = "qrc:/module/main_ui/MainScreen.qml"
+        main_screen_loader.source = "qrc:/Continuous_Patient_Monitoring/module/main_ui/MainScreen.qml"
     }
 }
