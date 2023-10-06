@@ -48,10 +48,6 @@ void HeartRateDataModel::dataUpdate()
                 /* Sensor data thread delay to read data every 1 second */
                 qDebug("Delay to read data %lld\n", ecg->m_timeStamp);
             }
-
-            //QList<qreal> *dataList = new QList<qreal>(HeartRateDataModel::HR_COLUMN_COUNT);
-            //dataList->replace(0, ecg->m_timeStamp);
-            //dataList->replace(1, ecg->m_ecgValue);
             QList<qreal> *dataList = new QList<qreal>();
             dataList->append(ecg->m_timeStamp);
             dataList->append(ecg->m_ecgValue);
