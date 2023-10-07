@@ -1,20 +1,18 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# Heart Rate and Temperature Monitoring 
+This application is used to monitor heart rate and temperature.
+The application is built based on following hardware, software platform/component.
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+Hardware
+- Raspberry Pi 4B 4G
+- ADS1115 ADC conversion module
+- Temperature sensor NTC 10K B3950
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+Software
+- Boot to Qt 6.5
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+# Todo
+1. Proces analog heart rate sensor data (ECG)
+2. Add system and sensor setting implementation
+3. Add more monitoring parameters: ETCO2, SPO2
+4. Add network service implementation
