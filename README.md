@@ -10,7 +10,7 @@ Hardware
 Software
 - Boot to Qt 6.5
 
-#Video
+# Video
 [<img src="https://i.ytimg.com/vi/0ZlhIj-2R3w/hqdefault.jpg">](https://youtu.be/0ZlhIj-2R3w "Heart rate and temperature monitoring demo")
 
 # Todo
