@@ -10,7 +10,8 @@ Hardware
 Software
 - Boot to Qt 6.5
 
-[<img src="https://i9.ytimg.com/vi_webp/0ZlhIj-2R3w/mq2.webp?sqp=CKT1hakG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGFwgZShYMA8=&rs=AOn4CLC3z1t5dAo84eFr6fuOAoiaKVftBg">](https://youtu.be/0ZlhIj-2R3w "Heart rate and temperature monitoring demo")
+#Video
+[<img src="https://i.ytimg.com/vi/0ZlhIj-2R3w/hqdefault.jpg">](https://youtu.be/0ZlhIj-2R3w "Heart rate and temperature monitoring demo")
 
 # Todo
 1. Proces analog heart rate sensor data (ECG)
