@@ -72,9 +72,15 @@ https://doc.qt.io/qtcreator/creator-configuring-projects.html
 
 https://decovar.dev/blog/2016/07/25/b2qt-raspberry-pi/
 
+https://retifrav.github.io/blog/2017/12/08/b2qt-startup-script/
+
+https://forum.qt.io/topic/125919/unable-to-open-i2c-device-no-such-file-or-directory-on-boot2qt
+
 2. ADS1115 ADC conversion module
 
 https://learn.adafruit.com/adafruit-4-channel-adc-breakouts/downloads
+
+https://github.com/OpenLabTools/RPi_ADS1115/blob/master/content.md
 
 https://www.ti.com/lit/ds/symlink/ads1115.pdf?ts=1697788934923&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FADS1115
 
