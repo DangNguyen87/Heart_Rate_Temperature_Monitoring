@@ -8,7 +8,7 @@ Hardware
 - Temperature sensor NTC 10K B3950
 
 Software
-- [Boot to Qt 6.5](https://doc.qt.io/Boot2Qt/)
+- [Boot to Qt](https://doc.qt.io/Boot2Qt/)
 
 # Boot to Qt Setting for Raspberry Pi
 Refer to [Raspberry Pi 4 Quick Start Guide](https://doc.qt.io/Boot2Qt/b2qt-qsg-raspberry.html) to setup development environment for Raspberry Pi. The following items will be covered in this guide.
@@ -19,6 +19,7 @@ Refer to [Raspberry Pi 4 Quick Start Guide](https://doc.qt.io/Boot2Qt/b2qt-qsg-r
 
 # Hardware Connection
 1. Connection between ADS1115 module and Raspberry Pi
+
 Connect ADS1115 module to Raspberry Pi as below.
 ```
     Raspberry Pi              ADS1115 module
@@ -32,7 +33,7 @@ The default I2C address (0x48) is used. Don't need to connect  ADDR pin of ADS11
 2. Connection between temperature sensor circuit and ADS1115 module
 
 Refer to this [tutorial](https://www.circuitbasics.com/arduino-thermistor-temperature-sensor-tutorial/) to create circuit for temperature sensor.
-Connect output of temperature sensor circuit (the connection between thermistor and 10K register) to channel 0 (pin A0) and channel 1 (pin A1) of ADS1115 module.
+Connect the output of temperature sensor circuit (the connection between thermistor and 10K register) to channel 0 (pin A0) and channel 1 (pin A1) of ADS1115 module.
 
 # Run application
 1. Enable I2C communication on Raspberry Pi
@@ -47,7 +48,17 @@ modprobe i2c-dev
 Verify i2c communication. The address of ADS1115 module will be displayed.
 
 ```console
-i2cdetect -y 0
+i2cdetect -y 1
+
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:                         -- -- -- -- -- -- -- -- 
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+40: -- -- -- -- -- -- -- -- 48 -- -- -- -- -- -- -- 
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+70: -- -- -- -- -- -- -- --  
 ```
 
 2. From Qt Creator start the application
