@@ -35,7 +35,7 @@ The default I2C address (0x48) is used. Don't need to connect  ADDR pin of ADS11
 Refer to this [tutorial](https://www.circuitbasics.com/arduino-thermistor-temperature-sensor-tutorial/) to create circuit for temperature sensor.
 Connect the output of temperature sensor circuit (the connection between thermistor and 10K register) to channel 0 (pin A0) and channel 1 (pin A1) of ADS1115 module.
 
-# Run application
+# Run Application
 1. Enable I2C communication on Raspberry Pi
 
 ssh to Raspberry Pi (IP adress displays on the screen, after Raspberry Pi booted), and enable i2c communication
